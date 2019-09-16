@@ -96,6 +96,10 @@ add_dependencies(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME} ${MAYA_LIBRARIES} glTF draco)
 
+set_property(TARGET maya2glTF PROPERTY
+    VS_PROJECT_IMPORT packages/MSBuildTasks.1.5.0.235/build/MSBuildTasks.targets
+)
+
 if(MSVC)
   
   add_custom_command(TARGET maya2glTF POST_BUILD 
