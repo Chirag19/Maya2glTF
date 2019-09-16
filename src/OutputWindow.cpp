@@ -1,5 +1,6 @@
 #include "externals.h"
 #include "OutputWindow.h"
+#include "MayaException.h"
 
 #ifdef WIN32
 
@@ -43,9 +44,17 @@ OutputWindow::OutputWindow()
 {
     const auto outputWindowHandle = WindowFinder("mayaConsole", nullptr).windowHandle;
 
-    if (outputWindowHandle)
+    if (!outputWindowHandle)
     {
-        m_editControlHandle = WindowFinder("Edit", outputWindowHandle).windowHandle;
+        MayaException::printError("Failed to find mayaConsole in output window");
+        return;
+    }
+
+    m_editControlHandle = WindowFinder("Edit", outputWindowHandle).windowHandle;
+    if (!m_editControlHandle)
+    {
+        MayaException::printError("Failed to find edit control in output window");
+        return;
     }
 }
 

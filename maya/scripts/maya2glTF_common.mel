@@ -326,7 +326,8 @@ global proc string maya2glTF_createCamera(string $name, int $width, int $height)
     }
 
     // TODO: Figure out how to create a camera with a name
-    string $camera[] = `camera -centerOfInterest 5 -focalLength 35 -lensSqueezeRatio 1 -cameraScale 1 -horizontalFilmAperture 1.4173 -horizontalFilmOffset 0 -verticalFilmAperture 0.9449 -verticalFilmOffset 0 -filmFit Fill -overscan 1 -motionBlur 0 -shutterAngle 144 -nearClipPlane 0.1 -farClipPlane 10000 -orthographic 0 -orthographicWidth 30 -panZoomEnabled 0 -horizontalPan 0 -verticalPan 0 -zoom 1`;
+    string $camera[] = `camera -centerOfInterest 5 -focalLength 35 -lensSqueezeRatio 1 -cameraScale 1 -horizontalFilmAperture 1 -horizontalFilmOffset 0 -verticalFilmAperture ($height/$width) -verticalFilmOffset 0 -filmFit Vertical -overscan 1 -motionBlur 0 -shutterAngle 144 -nearClipPlane 0.1 -farClipPlane 1000 -orthographic 0 -orthographicWidth 30 -panZoomEnabled 0 -horizontalPan 0 -verticalPan 0 -zoom 1 -displayFilmGate 1 -displayResolution 1`;
+
     string $transform = $camera[0];
     string $shape = $camera[1];
 
@@ -350,17 +351,15 @@ global proc string maya2glTF_createCamera(string $name, int $width, int $height)
     return $name;
 }
 
-global proc maya2glTF_createDefaultCamera() {
-    string $transform = maya2glTF_createCamera("camera1", 1280, 720);
-    xform -rotation -8 0 0 -translation 0 270 1100 $transform;
-    //xform -rotation -35 25 0 -translation 3 9 10 $transform;
-}
-
-global proc maya2glTF_createThumbnailCamera() {
+global proc maya2glTF_createThumbnailCameras() {
     string $transform = maya2glTF_createCamera("thumbcam", 256, 256);
-    print $transform;
-    xform -rotation -10 0 0 -translation 0 70 200 $transform;
-    //xform -rotation -35 25 0 -translation 3 9 10 $transform;
+    xform -rotation -10 0 0 -translation 0 140 275 $transform;
+
+    $transform = maya2glTF_createCamera("headcam", 256, 256);
+    xform -rotation -0 0 0 -translation 0 150 100 $transform;
+
+    $transform = maya2glTF_createCamera("posecam", 256, 256);
+    xform -rotation -10 0 0 -translation 0 140 275 $transform;
 }
 
 global proc int maya2glTF_getTraxClips(string $char, float $startTimes[], float $stopTimes[], string $clipNames[]) {
