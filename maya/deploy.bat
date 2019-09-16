@@ -1,6 +1,6 @@
 @echo off
-echo Copying "%~dp0\maya" to "%userprofile%\Documents\maya\"...
-xcopy /y /s "%~dp0\maya" "%userprofile%\Documents\maya\"
+echo Copying "%~dp0\maya" to "%userprofile%"...
+xcopy /y /s "%~dp0\maya" "%userprofile%"
 if errorlevel 1 goto :error
 
 color 2F
