@@ -11,7 +11,7 @@ if exist "%~dp0build\release" (
 )
 
 echo Updating version numbers...
-msbuild /v:q "%~dp0UpdateVersionNumbers.vcxproj" 
+msbuild "%~dp0UpdateVersionNumbers.vcxproj" 
 if errorlevel 1 goto :error
 
 echo Building Visual Studio project...
