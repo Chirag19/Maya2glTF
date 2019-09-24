@@ -1,11 +1,11 @@
-﻿# Maya to glTF exporter
+# Maya to glTF exporter
 
 ## News
 
-* Version 1.0 released for Windows! 
+* Version V1.0.0 is released for Windows! 
   - Mac OS-X release will follow.
 
-* Support for Maya 2019
+* Support for Maya 2019.2
 
 * Added donet core tool to merge multiple GLTF files into one
   - This allows exporting one animation per Maya file

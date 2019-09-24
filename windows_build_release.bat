@@ -1,4 +1,4 @@
-﻿@echo off
+@echo off
 
 echo Creating Visual Studio project...
 
